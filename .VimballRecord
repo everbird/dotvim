@@ -1,0 +1,4 @@
+winmanager.vba: call delete('/Users/everbird/.vim/doc/winmanager.txt')|call delete('/Users/everbird/.vim/plugin/start.gnome')|call delete('/Users/everbird/.vim/plugin/start.kde')|call delete('/Users/everbird/.vim/plugin/winfileexplorer.vim')|call delete('/Users/everbird/.vim/plugin/winmanager.vim')|call delete('/Users/everbird/.vim/plugin/wintagexplorer.vim')
+Recover-0.11.vba: call delete('/Users/everbird/.vim/plugin/recover.vim')|call delete('/Users/everbird/.vim/autoload/recover.vim')|call delete('/Users/everbird/.vim/doc/recoverPlugin.txt')
+conque_1.2.vba: call delete('/Users/everbird/.vim/autoload/conque_term.vim')|call delete('/Users/everbird/.vim/doc/conque_term.txt')|call delete('/Users/everbird/.vim/plugin/conque_term.vim')|call delete('/Users/everbird/.vim/syntax/conque_term.vim')
+tagbar.vba: call delete('/Users/everbird/.vim/doc/tagbar.txt')|call delete('/Users/everbird/.vim/plugin/tagbar.vim')|call delete('/Users/everbird/.vim/syntax/tagbar.vim')
