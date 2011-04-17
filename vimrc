@@ -1,3 +1,6 @@
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 set encoding=utf-8
 set nu
 set listchars=tab:>-,trail:~
@@ -16,6 +19,7 @@ set guifontwide=Monaco:h12
 
 syntax on
 set hlsearch
+set hidden
 
 colorscheme desert
 
@@ -59,4 +63,8 @@ let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文�
 let g:LookupFile_SortMethod = ""                "关闭对搜索结果的字母排序
 if filereadable("/Users/everbird/shadow/reading/filenametags")                "设置tag文件的名字
 let g:LookupFile_TagExpr ='"/Users/everbird/shadow/reading/filenametags"'
+endif
+
+if has("autocmd")
+    filetype plugin indent on
 endif
