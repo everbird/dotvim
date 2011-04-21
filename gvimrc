@@ -2,7 +2,7 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 filetype plugin indent on
-set mouse=a
+"set mouse=a
 
 set encoding=utf-8
 set nu
