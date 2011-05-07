@@ -19,3 +19,6 @@
 [submodule "bundle/pyflakes"]
 	path = bundle/pyflakes
 	url = git@github.com:everbird/pyflakes-vim.git
+[submodule "bundle/pathogen"]
+	path = bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen.git
