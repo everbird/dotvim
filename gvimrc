@@ -1,6 +1,8 @@
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
+set nocompatible
+
 filetype on " enables filetype detection
 filetype plugin on " enables filetype specific plugins
 filetype plugin indent on
