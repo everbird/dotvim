@@ -42,14 +42,15 @@ syntax on
 set hlsearch
 set hidden
 
-colorscheme desert
+"colorscheme desert
+colorscheme blackboard
 "colorscheme default
 
 set go-=T
 set bg=dark
 if &background == "dark"
     hi normal guibg=black
-    set transp=8
+    set transp=5
 endif
 
 set incsearch
@@ -143,3 +144,6 @@ function! <SID>StripTrailingWhitespacesAndDuplicateBlankLines()
 endfunction
 
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines()<CR>
+
+set cursorline
+set cursorcolumn
