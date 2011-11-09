@@ -26,7 +26,8 @@ syntax on
 set hlsearch
 set hidden
 
-colorscheme desert
+"colorscheme desert
+colorscheme blackboard
 
 set go-=T
 set bg=dark

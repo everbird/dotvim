@@ -37,3 +37,6 @@
 [submodule "bundle/commandt"]
 	path = bundle/commandt
 	url = https://github.com/wincent/Command-T.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git
