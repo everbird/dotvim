@@ -43,3 +43,6 @@
 [submodule "bundle/vst"]
 	path = bundle/vst
 	url = https://github.com/vim-scripts/VST.git
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = https://github.com/vim-scripts/Tagbar.git
