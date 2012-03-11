@@ -55,7 +55,7 @@ endif
 
 set incsearch
 
-let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
+let Tlist_Ctags_Cmd="/usr/bin/ctags"
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 
@@ -76,7 +76,7 @@ nnoremap <silent> <F3> :Grep<CR>
 
 " settings for tagbar
 nnoremap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
 let g:tagbar_width = 30
 
 " settings for gundo
