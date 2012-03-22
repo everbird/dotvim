@@ -117,6 +117,11 @@ endfunction
 
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines()<CR>
 
+" In line copy and paste to system clipboard
+" reference: http://vim.wikia.com/wiki/In_line_copy_and_paste_to_system_clipboard
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+
 if has("autocmd")
     filetype plugin indent on
 endif
