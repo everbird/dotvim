@@ -46,3 +46,6 @@
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/vim-scripts/Tagbar.git
+[submodule "bundle/jinja2"]
+	path = bundle/jinja2
+	url = https://github.com/Glench/Vim-Jinja2-Syntax.git
