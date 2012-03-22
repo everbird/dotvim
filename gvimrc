@@ -43,8 +43,9 @@ set hlsearch
 set hidden
 
 "colorscheme desert
-colorscheme blackboard
+"colorscheme blackboard
 "colorscheme default
+colorscheme wombat
 
 set go-=T
 set bg=dark
