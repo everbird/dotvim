@@ -123,3 +123,7 @@ nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 if has("autocmd")
     filetype plugin indent on
 endif
+
+let g:pyflakes_autostart = 0
+map <F7> :PyflakesToggle<cr>
+let g:pyflakes_use_quickfix = 0

@@ -3,7 +3,8 @@ call pathogen#runtime_append_all_bundles()
 
 set nocompatible
 
-filetype plugin indent on
+"" filetype plugin indent on
+filetype off
 
 "" full screen on statup
 set fu
@@ -145,3 +146,7 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines
 
 set cursorline
 set cursorcolumn
+
+let g:pyflakes_autostart = 0
+map <F7> :PyflakesToggle<cr>
+let g:pyflakes_use_quickfix = 0
