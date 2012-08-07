@@ -10,9 +10,6 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
-[submodule "bundle/autocomplpop"]
-	path = bundle/autocomplpop
-	url = https://github.com/vim-scripts/AutoComplPop.git
 [submodule "ftplugin/python/pyflakes"]
 	path = ftplugin/python/pyflakes
 	url = https://github.com/kevinw/pyflakes.git
@@ -67,3 +64,6 @@
 [submodule "bundle/jade"]
 	path = bundle/jade
 	url = git://github.com/digitaltoad/vim-jade.git
+[submodule "bundle/autocomplpop"]
+	path = bundle/autocomplpop
+	url = git://github.com/vim-scripts/AutoComplPop.git
