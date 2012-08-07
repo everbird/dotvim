@@ -21,9 +21,12 @@ set guifont=Monaco:h12
 set guifontwide=Monaco:h12
 
 set autoindent
-set cc=72,79
+if version >= 703
+    set cc=72,79
+    set undofile
+    set rnu
+endif
 set ruler
-set undofile
 
 set nocompatible
 syntax on
@@ -127,3 +130,6 @@ endif
 let g:pyflakes_autostart = 0
 map <F7> :PyflakesToggle<cr>
 let g:pyflakes_use_quickfix = 0
+
+let g:LustyJugglerSuppressRubyWarning = 1
+let g:LustyExplorerSuppressRubyWarning = 1

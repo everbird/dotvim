@@ -33,7 +33,7 @@ set autoindent
 
 set cc=72,79
 set ruler
-
+set rnu
 set undofile
 
 syntax on
