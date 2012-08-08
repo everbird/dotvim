@@ -16,9 +16,6 @@
 [submodule "bundle/autocomplpop"]
 	path = bundle/autocomplpop
 	url = git://github.com/vim-scripts/AutoComplPop.git
-[submodule "bundle/commandt"]
-	path = bundle/commandt
-	url = git://github.com/wincent/Command-T.git
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = git://github.com/tpope/vim-surround.git
@@ -88,3 +85,6 @@
 [submodule "bundle/grep"]
 	path = bundle/grep
 	url = git://github.com/vim-scripts/grep.vim.git
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = git://github.com/kien/ctrlp.vim.git

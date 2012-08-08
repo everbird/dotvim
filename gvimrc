@@ -78,15 +78,6 @@ nmap <C-Down> ]e
 vmap <C-UP> [egv
 vmap <C-Down> ]egv
 
-" Show hightlighting groups for current word
-nmap <C-S-P> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-    if !exists("*synstack")
-        return
-    endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
 if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 endif
@@ -134,3 +125,13 @@ set cursorcolumn
 let g:pyflakes_autostart = 0
 map <F7> :PyflakesToggle<cr>
 let g:pyflakes_use_quickfix = 0
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'rc'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~  " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
