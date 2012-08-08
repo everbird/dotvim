@@ -129,9 +129,10 @@ let g:LustyExplorerSuppressRubyWarning = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'rc'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~  " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,.DS_Store  " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$',
   \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'python': '\.pyc$\|\.ptlc$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
