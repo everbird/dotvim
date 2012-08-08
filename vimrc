@@ -125,3 +125,13 @@ let g:pyflakes_use_quickfix = 0
 
 let g:LustyJugglerSuppressRubyWarning = 1
 let g:LustyExplorerSuppressRubyWarning = 1
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'rc'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~  " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
