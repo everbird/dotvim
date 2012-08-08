@@ -34,9 +34,6 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
-[submodule "bundle/vimwiki"]
-	path = bundle/vimwiki
-	url = git://github.com/vim-scripts/vimwiki.git
 [submodule "bundle/pydoc"]
 	path = bundle/pydoc
 	url = git://github.com/fs111/pydoc.vim.git
@@ -64,3 +61,30 @@
 [submodule "ftplugin/python/pyflakes"]
 	path = ftplugin/python/pyflakes
 	url = git://github.com/kevinw/pyflakes.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
+[submodule "bundle/genutils"]
+	path = bundle/genutils
+	url = git://github.com/vim-scripts/genutils.git
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = git://github.com/fholgado/minibufexpl.vim.git
+[submodule "bundle/ack"]
+	path = bundle/ack
+	url = git://github.com/mileszs/ack.vim.git
+[submodule "bundle/bufexplorer"]
+	path = bundle/bufexplorer
+	url = git://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "bundle/mako"]
+	path = bundle/mako
+	url = git://github.com/vim-scripts/mako.vim.git
+[submodule "bundle/speeddating"]
+	path = bundle/speeddating
+	url = git://github.com/tpope/vim-speeddating.git
+[submodule "bundle/vimball"]
+	path = bundle/vimball
+	url = git://github.com/vim-scripts/Vimball.git
+[submodule "bundle/grep"]
+	path = bundle/grep
+	url = git://github.com/vim-scripts/grep.vim.git

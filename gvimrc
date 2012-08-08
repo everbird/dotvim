@@ -40,9 +40,6 @@ syntax on
 set hlsearch
 set hidden
 
-"colorscheme desert
-"colorscheme blackboard
-"colorscheme default
 colorscheme wombat
 
 set go-=T
@@ -54,19 +51,7 @@ endif
 
 set incsearch
 
-let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-
-"-----------------------------------------------------------------------------
-" NERD_tree.vim与winmanager.vim 的集成设置
-"-----------------------------------------------------------------------------
-let g:winManagerWindowLayout='NERDTree|TagList,BufExplorer'
-
-"let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap wm :WMToggle<cr>
-
-":set cscopequickfix=s-,c-,d-,i-,t-,e-
+nmap wm :NERDTreeToggle<cr>
 
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -141,7 +126,6 @@ function! <SID>StripTrailingWhitespacesAndDuplicateBlankLines()
     let @/=_s
     call cursor(l, c)
 endfunction
-
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines()<CR>
 
 set cursorline

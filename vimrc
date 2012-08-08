@@ -46,19 +46,7 @@ endif
 
 set incsearch
 
-let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-
-"-----------------------------------------------------------------------------
-" NERD_tree.vim与winmanager.vim 的集成设置
-"-----------------------------------------------------------------------------
-let g:winManagerWindowLayout='NERDTree|TagList,BufExplorer'
-
-"let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap wm :WMToggle<cr>
-
-":set cscopequickfix=s-,c-,d-,i-,t-,e-
+nmap wm :NERDTreeToggle<cr>
 
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -67,7 +55,11 @@ nnoremap <silent> <F3> :Grep<CR>
 
 " settings for tagbar
 nnoremap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+if executable("/usr/local/bin/ctags")
+    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+else
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
+endif
 let g:tagbar_width = 30
 
 " settings for gundo
