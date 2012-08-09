@@ -100,3 +100,9 @@
 [submodule "bundle/puppet"]
 	path = bundle/puppet
 	url = git://github.com/rodjek/vim-puppet.git
+[submodule "bundle/indent-guides"]
+	path = bundle/indent-guides
+	url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "bundle/wombat256mod"]
+	path = bundle/wombat256mod
+	url = git://github.com/everbird/wombat256.vim.git

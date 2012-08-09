@@ -76,7 +76,6 @@ if has('autocmd')
 
 endif
 
-
 "==============================================================================
 "MAPPINGS
 "==============================================================================
@@ -120,19 +119,12 @@ nnoremap    <Leader>s :set invspell<CR>
 "Simple brace completion
 inoremap    <C-]>   {<CR>}<ESC>O
 
-
 "==============================================================================
 "HOW IT LOOKS
 "==============================================================================
 
 set t_Co=256
 colorscheme wombat256mod
-
-set go-=T
-set bg=dark
-if &background == "dark"
-    hi normal guibg=black
-endif
 
 set tabstop=4           "Tab character width
 set softtabstop=4       "Amount of whitespace to be inserted
@@ -143,6 +135,8 @@ set smarttab
 
 set number              "Line numbering
 set background=dark     "Better colours for a dark background
+
+set go-=T
 
 "Stops words being hypenated when wrapping
 set wrap lbr
@@ -158,18 +152,6 @@ set listchars=tab:>-,trail:~
 "set listchars=tab:>-,trail:~,eol:¬
 "" Use the same symbols as TextMate for tabstops and EOLs
 "set listchars=tab:▸\ ,eol:¬
-
-"Mvim
-"
-if has('gui_macvim')
-    "set lines=56 columns=240
-    set guifont=Monaco:h12
-    set guifontwide=Monaco:h12
-
-    "" full screen on statup
-    set fu
-    set fuopt=maxvert,maxhorz
-endif
 
 
 "==============================================================================
@@ -232,6 +214,8 @@ vmap <C-Down> ]egv
 let g:LustyJugglerSuppressRubyWarning = 1
 let g:LustyExplorerSuppressRubyWarning = 1
 
+" Indent Guides
+let g:indent_guides_enable_on_vim_startup = 1
 
 "==============================================================================
 "FUNCTIONS
@@ -241,7 +225,9 @@ if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 
     " Resovle the stange color mass up issue
-    au VimEnter * source ~/.vim/colors/wombat256mod.vim
+    if !has('gui_macvim')
+        au VimEnter * source ~/.vim/bundle/wombat256mod/colors/wombat256mod.vim
+    endif
 endif
 
 function! <SID>StripTrailingWhitespacesAndDuplicateBlankLines()
@@ -260,5 +246,5 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines
 
 " In line copy and paste to system clipboard
 " reference: http://vim.wikia.com/wiki/In_line_copy_and_paste_to_system_clipboard
-vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+"vmap <C-S-c> y:call system("pbcopy", getreg("\""))<CR>
+"nmap <C-S-v> :call setreg("\"",system("pbpaste"))<CR>p
