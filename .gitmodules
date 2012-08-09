@@ -106,3 +106,6 @@
 [submodule "bundle/wombat256mod"]
 	path = bundle/wombat256mod
 	url = git://github.com/everbird/wombat256.vim.git
+[submodule "bundle/python"]
+	path = bundle/python
+	url = git://github.com/everbird/python.vim--Vasiliev.git
