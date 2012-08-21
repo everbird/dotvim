@@ -25,7 +25,7 @@ call pathogen#infect()
 "==============================================================================
 set backspace=indent,eol,start  "Allows backspacing over stuff
 set complete+=t                 "Tag completion
-set cpoptions+=$                "Overwrite text (visually)
+"set cpoptions+=$                "Overwrite text (visually)
 set cursorline
 set cursorcolumn
 set encoding=utf-8
@@ -142,7 +142,7 @@ set go-=T
 set wrap lbr
 
 " Show hidden tabs
-set list
+set list!
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
@@ -185,7 +185,7 @@ let g:tagbar_width = 30
 nnoremap <silent> <F6> :GundoToggle<CR>
 
 " PyFlakes
-let g:pyflakes_autostart = 0
+let g:pyflakes_autostart = 1
 map <F7> :PyflakesToggle<cr>
 let g:pyflakes_use_quickfix = 0
 
