@@ -70,6 +70,7 @@ if has('autocmd')
     au BufRead,BufNewFile *.ini  set filetype=dosini
     au BufRead,BufNewFile supervisord.conf   set filetype=dosini
     au BufRead,BufNewFile Vagrantfile   set filetype=ruby
+    au BufRead,BufNewFile Rakefile   set filetype=ruby
 
     "html/css/js indentation
     au BufRead,BufNewFile *.html   setl shiftwidth=2 tabstop=2 softtabstop=2
@@ -78,6 +79,7 @@ if has('autocmd')
     au BufRead,BufNewFile *.jade   setl shiftwidth=2 tabstop=2 softtabstop=2
 
     au BufRead,BufNewFile Vagrantfile   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile Rakefile   setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile *.rb  setl shiftwidth=2 tabstop=2 softtabstop=2
 
 endif
