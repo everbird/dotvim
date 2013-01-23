@@ -77,6 +77,7 @@ if has('autocmd')
     au BufRead,BufNewFile *.css    setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile *.js     setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile *.jade   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.scss   setl shiftwidth=2 tabstop=2 softtabstop=2
 
     au BufRead,BufNewFile Vagrantfile   setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile Rakefile   setl shiftwidth=2 tabstop=2 softtabstop=2
