@@ -145,3 +145,6 @@
 [submodule "bundle/buffergator"]
 	path = bundle/buffergator
 	url = git://github.com/jeetsukumaran/vim-buffergator.git
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
