@@ -255,3 +255,6 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines
 " reference: http://vim.wikia.com/wiki/In_line_copy_and_paste_to_system_clipboard
 "vmap <C-S-c> y:call system("pbcopy", getreg("\""))<CR>
 "nmap <C-S-v> :call setreg("\"",system("pbpaste"))<CR>p
+
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
