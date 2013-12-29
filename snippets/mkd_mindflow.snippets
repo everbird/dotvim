@@ -2,15 +2,28 @@ snippet mfs "Item section(mindflow)" b
 ***
 
 ## ${1:Title}
+
 ### meta
 - tiemstamp: `!p
 import datetime
 snip.rv = datetime.datetime.now().strftime('%m/%d/%Y %H:%M')
 `
-### ${2:output}
+
+### ${2:name}
 \`\`\`
 ${3:content}
-\`\`\`$0
+\`\`\`
+
+$0
+endsnippet
+
+snippet mfss "Sub item section(mindflow)" b
+### ${1:name}
+\`\`\`
+${2:content}
+\`\`\`
+
+$0
 endsnippet
 
 # vim:ft=snippets:
