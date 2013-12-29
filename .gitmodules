@@ -50,10 +50,6 @@
 	path = bundle/pyflakes
 	url = git://github.com/everbird/pyflakes-vim.git
     ignore = dirty
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = git://github.com/msanders/snipmate.vim.git
-    ignore = dirty
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
@@ -61,10 +57,6 @@
 [submodule "bundle/lusty"]
 	path = bundle/lusty
 	url = git://github.com/sjbach/lusty.git
-    ignore = dirty
-[submodule "bundle/vim-markdown"]
-	path = bundle/vim-markdown
-	url = git://github.com/hallison/vim-markdown.git
     ignore = dirty
 [submodule "bundle/stylus"]
 	path = bundle/stylus
@@ -148,3 +140,9 @@
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown.git
