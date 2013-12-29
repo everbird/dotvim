@@ -257,3 +257,13 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines
 
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
+
+" ultisnips
+let g:UltiSnipsListSnippets = "<F8>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsDontReverseSearchPath="1"
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
+
+" vim-markdonw
+let g:vim_markdown_initial_foldlevel=1
