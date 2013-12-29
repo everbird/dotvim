@@ -3,11 +3,14 @@ snippet mfs "Item section(mindflow)" b
 
 ## ${1:Title}
 ### meta
-- tiemstamp: ${2:date} ${3:time}
-### ${4:output}
-```
-${5:content}
-```$0
+- tiemstamp: `!p
+import datetime
+snip.rv = datetime.datetime.now().strftime('%m/%d/%Y %H:%M')
+`
+### ${2:output}
+\`\`\`
+${3:content}
+\`\`\`$0
 endsnippet
 
 # vim:ft=snippets:
