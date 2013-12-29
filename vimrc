@@ -66,7 +66,6 @@ syntax on                       "Syntax highlighting
 "--------
 if has('autocmd')
     "Setting filetypes
-    au BufRead,BufNewFile *.md   set filetype=mkd
     au BufRead,BufNewFile *.ini  set filetype=dosini
     au BufRead,BufNewFile supervisord.conf   set filetype=dosini
     au BufRead,BufNewFile Vagrantfile   set filetype=ruby
