@@ -2,16 +2,16 @@ snippet mfs "Item section(mindflow)" b
 ***
 
 ## ${1:Title}
-
-### meta
 - tiemstamp: `!p
 import datetime
 snip.rv = datetime.datetime.now().strftime('%m/%d/%Y %H:%M')
 `
+- type: ${2:thought}
+- tag: $3
 
 ### thought
 \`\`\`
-${2:content}
+${4:content}
 \`\`\`
 
 $0
