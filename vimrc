@@ -71,6 +71,9 @@ if has('autocmd')
     au BufRead,BufNewFile Vagrantfile   set filetype=ruby
     au BufRead,BufNewFile Rakefile   set filetype=ruby
 
+    " nginx
+    au BufRead,BufNewFile */webserver/files/conf/* set ft=nginx
+
     "html/css/js indentation
     au BufRead,BufNewFile *.html   setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile *.css    setl shiftwidth=2 tabstop=2 softtabstop=2
