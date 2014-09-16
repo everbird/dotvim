@@ -152,3 +152,9 @@
 [submodule "bundle/vimclojure"]
 	path = bundle/vimclojure
 	url = https://github.com/vim-scripts/VimClojure.git
+[submodule "bundle/easyalign"]
+	path = bundle/easyalign
+	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "bundle/exchange"]
+	path = bundle/exchange
+	url = https://github.com/tommcdo/vim-exchange.git

@@ -50,7 +50,10 @@ set vb                          "Visual bell
 set viminfo+=<0                 "Don't save registers
 set viminfo-=<50                "Same as above, removes default stuff from viminfo
 set virtualedit=all             "Cursor can move anywhere (ish)
-set wildmenu                    "Display options when autocompleting in cmdline mode
+"set wildmenu                    "Display options when autocompleting in cmdline mode
+
+set fileencoding=utf8
+set termencoding=utf8
 
 if version >= 703
     set colorcolumn=72,79           "Highlight columns
@@ -270,3 +273,10 @@ let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
 
 " vim-markdonw
 let g:vim_markdown_initial_foldlevel=1
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+"
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
