@@ -198,10 +198,10 @@ let g:tagbar_width = 30
 " Gundo
 nnoremap <silent> <F6> :GundoToggle<CR>
 
-" PyFlakes
-let g:pyflakes_autostart = 1
-map <F7> :PyflakesToggle<cr>
-let g:pyflakes_use_quickfix = 0
+" Python-mode
+let g:pymode_virtualenv = 1 "Enable automatic virtualenv detection
+
+
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
