@@ -165,3 +165,6 @@
 	path = bundle/pythonmode
 	url = https://github.com/klen/python-mode.git
     ignore = dirty
+[submodule "bundle/mips"]
+	path = bundle/mips
+	url = https://github.com/vim-scripts/mips.vim.git
