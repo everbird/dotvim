@@ -38,6 +38,7 @@ set laststatus=2                "Status line is always on
 "set mouse-=a                    "Disable mouse
 set nocompatible                "Git tae, Vi compatibility
 set nostartofline               "Stop jumping to the start of a line
+set nofoldenable                "Don't fold by default"
 set pastetoggle=<F2>            "Use F2 to toggle paste on/off in insert mode
 set ruler                       "Show the line and column number of the cursor position, separated by a comma.
 "set scrolloff=8                 "Keeps the cursor centered while scrolling
