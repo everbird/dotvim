@@ -17,8 +17,8 @@ if has('gui_macvim')
     set guifontwide=Monaco:h12
 
     "" full screen on statup
-    set fu
-    set fuopt=maxvert,maxhorz
+    "set fu
+    "set fuopt=maxvert,maxhorz
 endif
 
 " Indent Guides
