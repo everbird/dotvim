@@ -171,3 +171,9 @@
 [submodule "bundle/json"]
 	path = bundle/json
 	url = git@github.com:elzr/vim-json.git
+[submodule "bundle/wmgraphviz"]
+	path = bundle/wmgraphviz
+	url = git@github.com:wannesm/wmgraphviz.vim.git
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = git@github.com:msanders/snipmate.vim.git
