@@ -84,6 +84,7 @@ if has('autocmd')
     au BufRead,BufNewFile *.js     setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile *.jade   setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile *.scss   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.yml    setl shiftwidth=2 tabstop=2 softtabstop=2
 
     au BufRead,BufNewFile Vagrantfile   setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile Rakefile   setl shiftwidth=2 tabstop=2 softtabstop=2
@@ -133,6 +134,9 @@ nnoremap    <Leader>s :set invspell<CR>
 
 "Simple brace completion
 inoremap    <C-]>   {<CR>}<ESC>O
+
+"Remove quoutes
+nnoremap    <Leader>q di'hPl2x<CR>
 
 "==============================================================================
 "HOW IT LOOKS
@@ -281,3 +285,13 @@ vmap <Enter> <Plug>(EasyAlign)
 "
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
+
+" Disable new window auto documentation 
+" reference: https://github.com/klen/python-mode/issues/384
+set completeopt=menu
+
+" vim freezes when using pymode autocomplete, disable it
+" reference: https://github.com/klen/python-mode/issues/405
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope = 0
