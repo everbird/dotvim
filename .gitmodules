@@ -166,7 +166,7 @@
 	url = https://github.com/vim-scripts/mips.vim.git
 [submodule "bundle/json"]
 	path = bundle/json
-	url = git@github.com:elzr/vim-json.git
+	url = https://github.com/elzr/vim-json.git
 [submodule "bundle/wmgraphviz"]
 	path = bundle/wmgraphviz
 	url = git@github.com:wannesm/wmgraphviz.vim.git
