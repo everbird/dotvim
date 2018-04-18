@@ -140,39 +140,39 @@
     ignore = dirty
 [submodule "bundle/vim-markdown"]
 	path = bundle/vim-markdown
-	url = https://github.com/plasticboy/vim-markdown.git
+	url = git://github.com/plasticboy/vim-markdown.git
     ignore = dirty
 [submodule "bundle/nginx-vim-syntax"]
 	path = bundle/nginx-vim-syntax
-	url = https://github.com/evanmiller/nginx-vim-syntax.git
+	url = git://github.com/evanmiller/nginx-vim-syntax.git
     ignore = dirty
 [submodule "bundle/vimclojure"]
 	path = bundle/vimclojure
-	url = https://github.com/vim-scripts/VimClojure.git
+	url = git://github.com/vim-scripts/VimClojure.git
     ignore = dirty
 [submodule "bundle/easyalign"]
 	path = bundle/easyalign
-	url = https://github.com/junegunn/vim-easy-align.git
+	url = git://github.com/junegunn/vim-easy-align.git
     ignore = dirty
 [submodule "bundle/exchange"]
 	path = bundle/exchange
-	url = https://github.com/tommcdo/vim-exchange.git
+	url = git://github.com/tommcdo/vim-exchange.git
 [submodule "bundle/pythonmode"]
 	path = bundle/pythonmode
-	url = https://github.com/klen/python-mode.git
+	url = git://github.com/klen/python-mode.git
     ignore = dirty
 [submodule "bundle/mips"]
 	path = bundle/mips
-	url = https://github.com/vim-scripts/mips.vim.git
+	url = git://github.com/vim-scripts/mips.vim.git
 [submodule "bundle/json"]
 	path = bundle/json
-	url = https://github.com/elzr/vim-json.git
+	url = git://github.com/elzr/vim-json.git
 [submodule "bundle/wmgraphviz"]
 	path = bundle/wmgraphviz
-	url = https://github.com/wannesm/wmgraphviz.vim.git
+	url = git://github.com/wannesm/wmgraphviz.vim.git
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
+	url = git://github.com/msanders/snipmate.vim.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-	url = https://github.com/vim-syntastic/syntastic.git
+	url = git://github.com/vim-syntastic/syntastic.git
