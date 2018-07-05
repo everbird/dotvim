@@ -205,7 +205,7 @@ nnoremap <silent> <F6> :GundoToggle<CR>
 
 " Python-mode
 let g:pymode_virtualenv = 1 "Enable automatic virtualenv detection
-
+let g:pymode_python = 'python3'
 
 
 " CtrlP
