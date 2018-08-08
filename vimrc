@@ -320,6 +320,9 @@ set completeopt=menu
 
 " vim freezes when using pymode autocomplete, disable it
 " reference: https://github.com/klen/python-mode/issues/405
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope = 0
+" let g:pymode_rope_lookup_project = 0
+" let g:pymode_rope_complete_on_dot = 0
+" let g:pymode_rope = 0
+" 
+" " Disable virtualenv in Pymode
+" let g:pymode_virtualenv = 0
