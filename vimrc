@@ -326,3 +326,14 @@ set completeopt=menu
 " 
 " " Disable virtualenv in Pymode
 " let g:pymode_virtualenv = 0
+
+" Kite
+" let g:kite_auto_complete=0
+let g:kite_tab_complete=1
+
+set completeopt-=menu
+set completeopt+=menuone   " show the popup menu even when there is only 1 match
+set completeopt-=longest   " don't insert the longest common text
+set completeopt-=preview   " don't show preview window
+set completeopt+=noinsert  " don't insert any text until user chooses a match
+set completeopt-=noselect  " select first match
