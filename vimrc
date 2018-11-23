@@ -18,6 +18,7 @@
 " C-]       - Simple brace completion
 
 " Pathogen
+
 call pathogen#infect()
 
 "==============================================================================
