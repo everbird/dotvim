@@ -79,6 +79,9 @@ if has('autocmd')
     " nginx
     au BufRead,BufNewFile */webserver/files/conf/* set ft=nginx
 
+    " Python indent for Twitter
+    au BufRead,BufNewFile *.py     setl shiftwidth=2 tabstop=2 softtabstop=2
+
     "html/css/js indentation
     au BufRead,BufNewFile *.html   setl shiftwidth=2 tabstop=2 softtabstop=2
     au BufRead,BufNewFile *.css    setl shiftwidth=2 tabstop=2 softtabstop=2
