@@ -147,7 +147,8 @@ nnoremap    <Leader>q di'hPl2x<CR>
 "==============================================================================
 
 set t_Co=256
-colorscheme wombat256mod
+"colorscheme wombat256mod
+colorscheme onedark
 
 set tabstop=4           "Tab character width
 set softtabstop=4       "Amount of whitespace to be inserted
@@ -273,10 +274,10 @@ let g:LustyExplorerSuppressRubyWarning = 1
 if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 
-    " Resovle the stange color mass up issue
-    if !has('gui_macvim')
-        au VimEnter * source ~/.vim/bundle/wombat256mod/colors/wombat256mod.vim
-    endif
+    "" Resovle the stange color mass up issue
+    "if !has('gui_macvim')
+    "    au VimEnter * source ~/.vim/bundle/wombat256mod/colors/wombat256mod.vim
+    "endif
 endif
 
 function! <SID>StripTrailingWhitespacesAndDuplicateBlankLines()

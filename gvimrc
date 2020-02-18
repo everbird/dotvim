@@ -2,7 +2,8 @@
 "HOW IT LOOKS
 "==============================================================================
 
-colorscheme wombat
+"colorscheme wombat
+colorscheme onedark
 
 if &background == "dark"
     hi normal guibg=black
@@ -13,8 +14,10 @@ endif
 "
 if has('gui_macvim')
     "set lines=56 columns=240
-    set guifont=Monaco:h12
-    set guifontwide=Monaco:h12
+    "set guifont=Monaco:h12
+    "set guifontwide=Monaco:h12
+    set guifont=Menlo:h14
+    set guifontwide=Menlo:h14
 
     "" full screen on statup
     "set fu

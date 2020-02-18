@@ -177,3 +177,9 @@
 [submodule "bundle/vim-pants"]
 	path = bundle/vim-pants
 	url = https://github.com/pantsbuild/vim-pants.git
+[submodule "bundle/ansible"]
+	path = bundle/ansible
+	url = https://github.com/pearofducks/ansible-vim.git
+[submodule "bundle/onedark"]
+	path = bundle/onedark
+	url = https://github.com/joshdick/onedark.vim.git
