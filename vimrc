@@ -67,35 +67,6 @@ endif
 filetype plugin indent on       "Filetype plugin
 syntax on                       "Syntax highlighting
 
-"Autocmds
-"--------
-if has('autocmd')
-    "Setting filetypes
-    au BufRead,BufNewFile *.ini  set filetype=dosini
-    au BufRead,BufNewFile supervisord.conf   set filetype=dosini
-    au BufRead,BufNewFile Vagrantfile   set filetype=ruby
-    au BufRead,BufNewFile Rakefile   set filetype=ruby
-
-    " nginx
-    au BufRead,BufNewFile */webserver/files/conf/* set ft=nginx
-
-    " Python indent for Twitter
-    au BufRead,BufNewFile *.py     setl shiftwidth=2 tabstop=2 softtabstop=2
-
-    "html/css/js indentation
-    au BufRead,BufNewFile *.html   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.css    setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.js     setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.jade   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.scss   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.yml    setl shiftwidth=2 tabstop=2 softtabstop=2
-
-    au BufRead,BufNewFile Vagrantfile   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile Rakefile   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.rb  setl shiftwidth=2 tabstop=2 softtabstop=2
-
-endif
-
 "==============================================================================
 "MAPPINGS
 "==============================================================================
@@ -176,6 +147,35 @@ set listchars=tab:>-,trail:~
 "set listchars=tab:>-,trail:~,eol:¬
 "" Use the same symbols as TextMate for tabstops and EOLs
 "set listchars=tab:▸\ ,eol:¬
+
+"Autocmds
+"--------
+if has('autocmd')
+    "Setting filetypes
+    au BufRead,BufNewFile *.ini  set filetype=dosini
+    au BufRead,BufNewFile supervisord.conf   set filetype=dosini
+    au BufRead,BufNewFile Vagrantfile   set filetype=ruby
+    au BufRead,BufNewFile Rakefile   set filetype=ruby
+
+    " nginx
+    au BufRead,BufNewFile */webserver/files/conf/* set ft=nginx
+
+    " Python indent for Twitter
+    au BufRead,BufNewFile *.py     setl shiftwidth=2 tabstop=2 softtabstop=2
+
+    "html/css/js indentation
+    au BufRead,BufNewFile *.html   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.css    setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.js     setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.jade   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.scss   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.yml    setl shiftwidth=2 tabstop=2 softtabstop=2
+
+    au BufRead,BufNewFile Vagrantfile   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile Rakefile   setl shiftwidth=2 tabstop=2 softtabstop=2
+    au BufRead,BufNewFile *.rb  setl shiftwidth=2 tabstop=2 softtabstop=2
+
+endif
 
 
 "==============================================================================
@@ -333,3 +333,8 @@ set completeopt-=noselect  " select first match
 " let g:pymode_rope_lookup_project = 0
 " let g:pymode_rope_complete_on_dot = 0
 " let g:pymode_rope = 0
+
+"==============================================================================
+"ALIAS
+"==============================================================================
+:command FS set guifont=Menlo:h17
