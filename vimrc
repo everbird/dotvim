@@ -338,3 +338,4 @@ set completeopt-=noselect  " select first match
 "ALIAS
 "==============================================================================
 :command FS set guifont=Menlo:h17
+let g:tagbar_ctags_bin = "/opt/homebrew/bin/ctags"
