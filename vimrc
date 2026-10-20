@@ -1,341 +1,173 @@
-" List of mappings
-"----------------
-" ,ve   - Open vimrc
-" ,vs   - Source vimrc
-" ,d    - Insert current date
-" ,hl   - Toggle search highlighting
-" ,l    - Show hidden characters
-" ,py   - Execute current python script
-" ,w    - Toggle word wrapping
-" ,s    - Toggle spell checking
-"
-" ,nt   - Open NERDtree
-" ,nf   - Open NERDtree using current file's directory
-" ,wm   - Toggle NERDTree
-"
-" C-down    - Move current line/selection down
-" C-up      - Move current line/selection up
-" C-]       - Simple brace completion
+" Shared configuration for Vim 7.4+ and Neovim.
+set nocompatible
 
-" Pathogen
+let g:dotvim_root = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let s:root = escape(g:dotvim_root, ',')
+if stridx(',' . &runtimepath . ',', ',' . s:root . ',') < 0
+    let &runtimepath = s:root . ',' . &runtimepath
+endif
 
-call pathogen#infect()
+" Machine-specific settings are shared by both editors and never tracked.
+let s:local = get(g:, 'dotvim_local_config', expand('~/.vimrc.local'))
+if filereadable(s:local)
+    execute 'source ' . fnameescape(s:local)
+endif
+if !exists('g:dotvim_profile')
+    let s:profile = expand('~/.dotvim-profile')
+    let g:dotvim_profile = filereadable(s:profile) ? get(readfile(s:profile, '', 1), 0, 'basic') : 'basic'
+endif
+if !empty($DOTVIM_PROFILE)
+    let g:dotvim_profile = $DOTVIM_PROFILE
+endif
+if index(['basic', 'full'], g:dotvim_profile) < 0
+    let g:dotvim_profile = 'basic'
+endif
 
-"==============================================================================
-"HOW IT WORKS
-"==============================================================================
-set backspace=indent,eol,start  "Allows backspacing over stuff
-set complete+=t                 "Tag completion
-"set cpoptions+=$                "Overwrite text (visually)
-set cursorline
-set cursorcolumn
+set backspace=indent,eol,start
 set encoding=utf-8
-set fillchars=                  "Remove the characters in window separators
-set hidden                      "Allows hidden buffers with changes
-set hlsearch                    "When there is a previous search pattern, highlight all its matches.
-set ignorecase                  "Search is case insensitive unless...
-set incsearch                   "Show match while entering search
-set laststatus=2                "Status line is always on
-"set mouse-=a                    "Disable mouse
-set nocompatible                "Git tae, Vi compatibility
-set nostartofline               "Stop jumping to the start of a line
-set nofoldenable                "Don't fold by default"
-set pastetoggle=<F2>            "Use F2 to toggle paste on/off in insert mode
-set ruler                       "Show the line and column number of the cursor position, separated by a comma.
-"set scrolloff=8                 "Keeps the cursor centered while scrolling
-"set shellslash                  "Use / instead of \ for file paths and such
-set shortmess+=I                "Remove the intro message
-set showmatch                   "Jump to matching paren when inserting
-set smartcase                   "An uppercase letter is found
-set spl=en_gb                   "Language for spellchecking
-set vb                          "Visual bell
-set viminfo+=<0                 "Don't save registers
-set viminfo-=<50                "Same as above, removes default stuff from viminfo
-set virtualedit=all             "Cursor can move anywhere (ish)
-"set wildmenu                    "Display options when autocompleting in cmdline mode
-
-set fileencoding=utf8
-set termencoding=utf8
-
-if version >= 703
-    set colorcolumn=72,79           "Highlight columns
-    set relativenumber              "Show the line number relative to the line with the cursor in front of each line.
-    set undofile
+set hidden
+set hlsearch incsearch ignorecase smartcase
+set cursorline cursorcolumn
+set laststatus=2 ruler number
+set nostartofline nofoldenable
+set shortmess+=I
+set showmatch visualbell
+set virtualedit=all
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent smarttab
+set wrap linebreak
+set list listchars=tab:>-,trail:~
+set wildmenu
+set wildignore+=*.o,*.so,*.pyc,*.swp,*.zip,*~,.DS_Store,*/.git/*,*/node_modules/*
+set path+=**
+set completeopt=menu,menuone
+set background=dark
+if exists('+colorcolumn')
+    set colorcolumn=72,79
+endif
+if exists('+relativenumber')
+    set relativenumber
+endif
+if exists('+spelllang')
+    set spelllang=en_gb
+endif
+if exists('+pastetoggle')
+    set pastetoggle=<F2>
+endif
+if has('nvim') && exists('+shada')
+    set shada-=<50 shada+=<0
+elseif exists('+viminfo')
+    set viminfo-=<50 viminfo+=<0
+endif
+if has('nvim') || v:version >= 800
+    set completeopt+=noinsert
+endif
+if exists('+termguicolors') && get(g:, 'dotvim_truecolor', $COLORTERM =~# 'truecolor\|24bit' || $TERM =~# 'direct')
+    set termguicolors
 endif
 
-"filetype off
-filetype plugin indent on       "Filetype plugin
-syntax on                       "Syntax highlighting
+" Keep state out of edited projects; unwritable state directories are optional.
+let s:state = get(g:, 'dotvim_state_dir', (empty($XDG_STATE_HOME) ? expand('~/.local/state') : $XDG_STATE_HOME) . '/dotvim')
+for s:kind in ['swap', 'backup', 'undo']
+    let s:directory = s:state . '/' . s:kind
+    let s:parent = s:directory
+    while !isdirectory(s:parent) && empty(getftype(s:parent))
+        let s:parent = fnamemodify(s:parent, ':h')
+    endwhile
+    if !isdirectory(s:parent) || filewritable(s:parent) != 2
+        continue
+    endif
+    try
+        if !isdirectory(s:directory)
+            call mkdir(s:directory, 'p', 0700)
+        endif
+        if filewritable(s:directory) == 2
+            let s:directory = escape(s:directory, ',') . '//'
+            if s:kind ==# 'swap'
+                let &directory = s:directory
+            elseif s:kind ==# 'backup'
+                let &backupdir = s:directory
+            elseif has('persistent_undo')
+                let &undodir = s:directory
+                set undofile
+            endif
+        endif
+    catch
+        " Editing still works when the state directory cannot be created.
+    endtry
+endfor
 
-"==============================================================================
-"MAPPINGS
-"==============================================================================
-let mapleader=','
-
-"Default vimrc mappings
-nnoremap    <Leader>ve :e $MYVIMRC<CR>
-nnoremap    <Leader>vs :so $MYVIMRC<CR>
-
-"Macvim vimrc mappings
-if has('unix')
-    nnoremap    <Leader>ve :e ~/.gvimrc<CR>
-    nnoremap    <Leader>vs :so ~/.gvimrc<CR>
+let mapleader = ','
+nnoremap <silent> <Leader>ve :execute 'edit ' . fnameescape(g:dotvim_root . '/vimrc')<CR>
+nnoremap <silent> <Leader>vs :execute 'source ' . fnameescape(g:dotvim_root . '/vimrc')<CR>
+nnoremap <Leader>cd :execute 'cd ' . fnameescape(expand('%:p:h'))<CR>:pwd<CR>
+nnoremap <Leader>d "=strftime('%d %b %Y')<CR>P
+nnoremap <silent> <C-n> :bnext<CR>
+nnoremap <silent> <C-b> :bprevious<CR>
+nnoremap <Leader>hl :set invhlsearch<CR>:set hlsearch?<CR>
+nnoremap <silent> <Leader>l :set invlist<CR>
+nnoremap <Leader>w :set invwrap<CR>
+if exists('+spell')
+    nnoremap <Leader>s :set invspell<CR>
 endif
+nnoremap <silent> <Leader>py :call dotvim#python()<CR>
+inoremap <C-]> {<CR>}<Esc>O
+nnoremap <Leader>q di'hPl2x<CR>
+nnoremap <silent> <C-Up> :<C-u>silent! move .-2<CR>==
+nnoremap <silent> <C-Down> :<C-u>silent! move .+1<CR>==
+xnoremap <silent> <C-Up> :move '<-2<CR>gv=gv
+xnoremap <silent> <C-Down> :move '>+1<CR>gv=gv
 
-"Cd to current file's dir
-nnoremap    <Leader>cd  :cd %:h<CR>:pwd<CR>
+" Native fallbacks remain available without any installed plugins.
+nnoremap <C-p> :find<Space>
+nnoremap <silent> <Leader>nt :call dotvim#browse(0)<CR>
+nnoremap <silent> <Leader>nf :call dotvim#browse(1)<CR>
+nnoremap <silent> <Leader>wm :call dotvim#browse(0)<CR>
+nnoremap <silent> wm :call dotvim#browse(0)<CR>
+nnoremap <F3> :Grep<Space>
+nnoremap <silent> <F4> :call dotvim#optional('TagbarToggle', 'Tagbar with Universal Ctags')<CR>
+nnoremap <silent> <F5> :call dotvim#clean()<CR>
+nnoremap <silent> <F6> :call dotvim#optional('UndotreeToggle', 'Undotree')<CR>
+command! -nargs=+ Grep call dotvim#grep(<q-args>)
+command! DotvimHealth call dotvim#health()
 
-"Insert current date
-nnoremap    <Leader>d  "=strftime('%d %b %Y')<CR>P
+if filereadable(g:dotvim_root . '/plugins.vim')
+    execute 'source ' . fnameescape(g:dotvim_root . '/plugins.vim')
+endif
+filetype plugin indent on
 
-"Moving between buffers
-nnoremap    <silent> <C-n> :bn<CR>
-nnoremap    <silent> <C-b> :bp<CR>
-
-"Toggle search highlighting
-nnoremap    <Leader>hl :set invhls<CR>:set hls?<CR>
-
-"Show hidden chars
-nnoremap    <silent> <Leader>l :set invlist<CR>
-
-"Run python script
-nnoremap    <Leader>py :!python %<CR>
-
-"wrap / Nowrap
-nnoremap    <Leader>w :set invwrap<CR>
-
-"Spell checking
-nnoremap    <Leader>s :set invspell<CR>
-
-"Simple brace completion
-inoremap    <C-]>   {<CR>}<ESC>O
-
-"Remove quoutes
-nnoremap    <Leader>q di'hPl2x<CR>
-
-"==============================================================================
-"HOW IT LOOKS
-"==============================================================================
-
-set t_Co=256
-"colorscheme wombat256mod
-colorscheme onedark
-
-set tabstop=4           "Tab character width
-set softtabstop=4       "Amount of whitespace to be inserted
-set shiftwidth=4        "Amount of whitespace in Normal mode
-set expandtab           "Spaces rather than tabs
-set autoindent
-set smarttab
-
-set number              "Line numbering
-set background=dark     "Better colours for a dark background
-
-set go-=T
-
-"Stops words being hypenated when wrapping
-set wrap lbr
-
-" Show hidden tabs
-set list!
-
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
-
-"Setting hidden chars
-set listchars=tab:>-,trail:~
-"set listchars=tab:>-,trail:~,eol:¬
-"" Use the same symbols as TextMate for tabstops and EOLs
-"set listchars=tab:▸\ ,eol:¬
-
-"Autocmds
-"--------
 if has('autocmd')
-    "Setting filetypes
-    au BufRead,BufNewFile *.ini  set filetype=dosini
-    au BufRead,BufNewFile supervisord.conf   set filetype=dosini
-    au BufRead,BufNewFile Vagrantfile   set filetype=ruby
-    au BufRead,BufNewFile Rakefile   set filetype=ruby
-
-    " nginx
-    au BufRead,BufNewFile */webserver/files/conf/* set ft=nginx
-
-    " Python indent for Twitter
-    au BufRead,BufNewFile *.py     setl shiftwidth=2 tabstop=2 softtabstop=2
-
-    "html/css/js indentation
-    au BufRead,BufNewFile *.html   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.css    setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.js     setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.jade   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.scss   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.yml    setl shiftwidth=2 tabstop=2 softtabstop=2
-
-    au BufRead,BufNewFile Vagrantfile   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile Rakefile   setl shiftwidth=2 tabstop=2 softtabstop=2
-    au BufRead,BufNewFile *.rb  setl shiftwidth=2 tabstop=2 softtabstop=2
-
+    augroup dotvim
+        autocmd!
+        autocmd BufRead,BufNewFile *.ini,supervisord.conf setfiletype dosini
+        autocmd BufRead,BufNewFile Vagrantfile,Rakefile setfiletype ruby
+        autocmd BufRead,BufNewFile */webserver/files/conf/* setfiletype nginx
+        " Preserve the original two-space indentation for these languages.
+        autocmd FileType python,ruby,html,css,javascript,javascriptreact,typescript,typescriptreact,jade,pug,scss,yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    augroup END
+    if !empty(&filetype) && exists('#dotvim#FileType#' . &filetype)
+        execute 'doautocmd dotvim FileType ' . &filetype
+    endif
 endif
 
-
-"==============================================================================
-"PLUGINS
-"==============================================================================
-
-"NERDTree
-let NERDTreeWinPos='left'
-nnoremap <silent> <Leader>nt :NERDTree.<CR>
-"Open tree using file's directory
-nnoremap <silent> <Leader>nf :NERDTree %:p:h<CR>
-nmap wm :NERDTreeToggle<cr>
-
-" MiniBufExpl
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-
-" Grep
-nnoremap <silent> <F3> :Grep<CR>
-
-" Tagbar
-nnoremap <silent> <F4> :TagbarToggle<CR>
-if executable("/usr/local/bin/ctags")
-    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-else
-    let g:tagbar_ctags_bin = '/usr/bin/ctags'
-endif
-let g:tagbar_width = 30
-" For gotags per https://github.com/jstemmer/gotags
-let g:tagbar_type_go = {
-	\ 'ctagstype' : 'go',
-	\ 'kinds'     : [
-		\ 'p:package',
-		\ 'i:imports:1',
-		\ 'c:constants',
-		\ 'v:variables',
-		\ 't:types',
-		\ 'n:interfaces',
-		\ 'w:fields',
-		\ 'e:embedded',
-		\ 'm:methods',
-		\ 'r:constructor',
-		\ 'f:functions'
-	\ ],
-	\ 'sro' : '.',
-	\ 'kind2scope' : {
-		\ 't' : 'ctype',
-		\ 'n' : 'ntype'
-	\ },
-	\ 'scope2kind' : {
-		\ 'ctype' : 't',
-		\ 'ntype' : 'n'
-	\ },
-	\ 'ctagsbin'  : 'gotags',
-	\ 'ctagsargs' : '-sort -silent'
-\ }
-
-" Gundo
-nnoremap <silent> <F6> :GundoToggle<CR>
-
-" Python-mode
-let g:pymode_virtualenv = 1 "Enable automatic virtualenv detection
-let g:pymode_python = 'python3'
-
-
-" CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'rc'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*~,.DS_Store  " MacOSX/Linux
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
-  \ 'python': '\.pyc$\|\.ptlc$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-" unimpaired
-" Bubbing single line
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubbing multiple lines
-vmap <C-UP> [egv
-vmap <C-Down> ]egv
-
-" LustyExplorer
-let g:LustyJugglerSuppressRubyWarning = 1
-let g:LustyExplorerSuppressRubyWarning = 1
-
-
-"==============================================================================
-"FUNCTIONS
-"==============================================================================
-
-if has("autocmd")
-    autocmd bufwritepost .vimrc source $MYVIMRC
-
-    "" Resovle the stange color mass up issue
-    "if !has('gui_macvim')
-    "    au VimEnter * source ~/.vim/bundle/wombat256mod/colors/wombat256mod.vim
-    "endif
+if has('syntax')
+    syntax enable
+    let s:theme = get(g:, 'dotvim_colorscheme', index(get(g:, 'dotvim_loaded_plugins', []), 'onedark') >= 0 ? 'onedark' : 'desert')
+    let s:theme_available = 0
+    for s:extension in (has('nvim') ? ['vim', 'lua'] : ['vim'])
+        let s:color = 'colors/' . s:theme . '.' . s:extension
+        if !empty(globpath(&runtimepath, s:color))
+            let s:theme_available = 1
+            break
+        endif
+        if exists('+packpath') && (!empty(globpath(&packpath, 'pack/*/opt/*/' . s:color)) || !empty(globpath(&packpath, 'pack/*/start/*/' . s:color)))
+            let s:theme_available = 1
+            break
+        endif
+    endfor
+    execute 'colorscheme ' . fnameescape(s:theme_available ? s:theme : 'desert')
 endif
 
-function! <SID>StripTrailingWhitespacesAndDuplicateBlankLines()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    %s/^\n$//g
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespacesAndDuplicateBlankLines()<CR>
-
-" In line copy and paste to system clipboard
-" reference: http://vim.wikia.com/wiki/In_line_copy_and_paste_to_system_clipboard
-"vmap <C-S-c> y:call system("pbcopy", getreg("\""))<CR>
-"nmap <C-S-v> :call setreg("\"",system("pbpaste"))<CR>p
-
-hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade  Comment
-
-" ultisnips
-let g:UltiSnipsListSnippets = "<F8>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsDontReverseSearchPath="1"
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
-
-" vim-markdonw
-let g:vim_markdown_initial_foldlevel=1
-
-" vim-easy-align
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-"
-" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <Leader>a <Plug>(EasyAlign)
-
-" Disable new window auto documentation 
-" reference: https://github.com/klen/python-mode/issues/384
-set completeopt=menu
-set completeopt+=menuone   " show the popup menu even when there is only 1 match
-set completeopt-=longest   " don't insert the longest common text
-set completeopt-=preview   " don't show preview window
-set completeopt+=noinsert  " don't insert any text until user chooses a match
-set completeopt-=noselect  " select first match
-
-" vim freezes when using pymode autocomplete, disable it
-" reference: https://github.com/klen/python-mode/issues/405
-" let g:pymode_rope_lookup_project = 0
-" let g:pymode_rope_complete_on_dot = 0
-" let g:pymode_rope = 0
-
-"==============================================================================
-"ALIAS
-"==============================================================================
-:command FS set guifont=Menlo:h17
-let g:tagbar_ctags_bin = "/opt/homebrew/bin/ctags"
+" Optional final overrides, defined in ~/.vimrc.local.
+if exists('*DotvimLocal')
+    call DotvimLocal()
+endif

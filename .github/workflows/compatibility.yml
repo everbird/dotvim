@@ -1,0 +1,64 @@
+name: Compatibility
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editors:
+    name: ${{ matrix.os }} / ${{ matrix.editor }} ${{ matrix.version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        editor: [vim, nvim]
+        version: [stable]
+        include:
+          - os: ubuntu-latest
+            editor: vim
+            version: v7.4
+          - os: ubuntu-latest
+            editor: nvim
+            version: v0.9.5
+          - os: ubuntu-latest
+            editor: nvim
+            version: v0.11.5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Linux test tools
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libncurses-dev ripgrep fzf universal-ctags shellcheck
+      - name: Install macOS test tools
+        if: runner.os == 'macOS'
+        run: brew install ripgrep fzf universal-ctags shellcheck
+      - uses: rhysd/action-setup-vim@v1
+        id: editor
+        env:
+          CFLAGS: -O2 -std=gnu89 -Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types
+        with:
+          version: ${{ matrix.version }}
+          neovim: ${{ matrix.editor == 'nvim' }}
+          configure-args: --with-features=normal --disable-gui --without-x --disable-nls --enable-multibyte
+      - name: Check the installer
+        run: |
+          sh -n bootstrap.sh
+          shellcheck -s sh bootstrap.sh
+      - name: Check editor and installer behavior
+        env:
+          DOTVIM_TEST_EDITOR: ${{ steps.editor.outputs.executable }}
+          NVIM_LOG_FILE: ${{ runner.temp }}/dotvim-nvim.log
+        run: |
+          "$DOTVIM_TEST_EDITOR" -u NONE -i NONE -n -es --noplugin -S scripts/install_plugins.vim
+          python3 -m unittest discover -s tests -v
