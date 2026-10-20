@@ -2,6 +2,7 @@ name: Compatibility
 
 on:
   push:
+    branches: [master]
   pull_request:
   workflow_dispatch:
 
@@ -32,9 +33,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
       - name: Install Linux test tools
         if: runner.os == 'Linux'
         run: |
@@ -55,6 +53,8 @@ jobs:
         run: |
           sh -n bootstrap.sh
           shellcheck -s sh bootstrap.sh
+      # The runner's Python is sufficient; setup-python can replace Vim's libpython
+      # through LD_LIBRARY_PATH and break otherwise usable Python support.
       - name: Check editor and installer behavior
         env:
           DOTVIM_TEST_EDITOR: ${{ steps.editor.outputs.executable }}
