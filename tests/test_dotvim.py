@@ -41,7 +41,7 @@ class Workspace(unittest.TestCase):
 @unittest.skipUnless(EDITOR, 'Set DOTVIM_TEST_EDITOR to a Vim or Neovim executable')
 class EditorTests(Workspace):
     def run_editor(self, body, profile='basic', checkout=ROOT, settings='', environment=None,
-                   native_browser=False):
+                   native_browser=False, tool_path=None):
         version = subprocess.check_output([EDITOR, '--version'], text=True)
         is_nvim = 'NVIM' in version
         # Vim 7.4's bundled netrw uses silent! unmaps which behave differently
@@ -72,6 +72,9 @@ qa!
                    + ' | let g:netrw_home=' + vim_string(self.scratch)
                    + " | let g:dotvim_snippets=0 | let g:dotvim_lsp=0 | let v:errmsg=''"
                    + (' | ' + settings if settings else ''))
+        if tool_path is not None:
+            # Homebrew's Vim launcher needs shell utilities before Vim starts.
+            initial = 'let $PATH=' + vim_string(tool_path) + ' | ' + initial
         arguments = [EDITOR, '-n', '-i', 'NONE', '-u', str(checkout / ('init.vim' if is_nvim else 'vimrc')),
                      '--cmd', initial, '-S', str(script)]
         arguments[1:1] = ['--headless'] if is_nvim else ['-N', '-U', 'NONE', '-es']
@@ -192,7 +195,7 @@ qa!
     call dotvim#clean()
     call Check(getline(1, '$') ==# ['first', '', 'last'], 'Whitespace cleanup failed')
     call Check(@/ ==# 'preserve_search' && col('.') == 2, 'Cleanup changed search or cursor')
-''', environment={'PATH': str(empty_path)})
+''', tool_path=str(empty_path))
 
     @unittest.skipUnless((ROOT / 'plugged/surround/plugin/surround.vim').exists(),
                          'Plugins have not been installed with vim-plug')
@@ -222,7 +225,7 @@ qa!
     for name in ['tagbar', 'fzf', 'fzf-vim', 'ultisnips', 'lsp']
         call Check(get(g:plugs[name], 'on', ['unexpected']) ==# [], 'Unavailable plugin was not disabled')
     endfor
-''', profile='full', environment={'PATH': str(empty_path)})
+''', profile='full', tool_path=str(empty_path))
 
     def test_startup_does_not_download(self):
         git = shutil.which('git')
@@ -293,7 +296,7 @@ qa!
     def test_optional_snippet_engine(self):
         self.run_editor('''
     if index(g:dotvim_loaded_plugins, 'ultisnips') >= 0
-        call Check(exists(':UltiSnipsEdit') == 2, 'Snippet engine did not initialize')
+        call Check(exists(':UltiSnipsEdit') == 2, 'Snippet engine did not initialize: ' . string(get(g:, 'UltiSnipsPythonDiagnostics', [])))
     endif
 ''', profile='full', settings='let g:dotvim_snippets=1')
 
@@ -370,8 +373,8 @@ class InstallerTests(Workspace):
         self.assertEqual((backups[0] / 'vim' / 'keep').read_text(), 'vim data')
         self.assertEqual(os.readlink(backups[0] / 'vimrc'), 'missing-original-config')
         self.assertTrue((backups[0] / 'nvim' / 'init.lua').exists())
-        self.assertEqual((self.install_home / '.vim').resolve(), self.checkout)
-        self.assertEqual(nvim.resolve(), self.checkout)
+        self.assertTrue((self.install_home / '.vim').samefile(self.checkout))
+        self.assertTrue(nvim.samefile(self.checkout))
         self.install()
         self.assertEqual(list((self.install_home / '.dotvim-backups').iterdir()), backups)
         self.assertEqual((self.install_home / '.dotvim-profile').read_text(), 'basic\n')
@@ -490,7 +493,7 @@ class InstallerTests(Workspace):
         self.checkout = destination
         self.install('--vim-only')
         self.assertFalse(destination.is_symlink())
-        self.assertEqual((self.install_home / '.vimrc').resolve(), destination / 'vimrc')
+        self.assertTrue((self.install_home / '.vimrc').samefile(destination / 'vimrc'))
 
     def test_nvim_only(self):
         self.install('--nvim-only')
