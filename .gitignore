@@ -39,3 +39,15 @@ Thumbs.db
 *.swp
 .svn
 .netrwhist
+
+# Local editor state and machine-specific overrides.
+vimrc.local
+.dotvim-profile
+.vimrc.local
+.viminfo
+.shada
+*.un~
+.nvimlog
+
+# Plugin checkouts are managed by vim-plug; pins live in plugins.vim.
+/plugged/
